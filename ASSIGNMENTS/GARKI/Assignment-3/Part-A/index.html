@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://s3.jp-tok.cloud-object-storage.appdomain.cloud/krishnan-ramalingam/styles.css" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 3</title>
+</head>
+<body class="bg-gray-200">
+    <div class="title">Using IBM Object Store and Watson AI</div>
+    <div class="image-grid">
+        <a href="https://github.com/IBM-EPBL/IBM-Project-26295-1660024117"><img src="https://projectpeta.s3.jp-tok.cloud-object-storage.appdomain.cloud/ss1.jpg"/></a>
+        <a href="https://github.com/IBM-EPBL/IBM-Project-26295-1660024117"><img src="https://projectpeta.s3.jp-tok.cloud-object-storage.appdomain.cloud/ss2.png"/></a>
+        <a href="https://github.com/IBM-EPBL/IBM-Project-26295-1660024117"><img src="https://projectpeta.s3.jp-tok.cloud-object-storage.appdomain.cloud/ss3.jpg"/></a>
+        <a href="https://github.com/IBM-EPBL/IBM-Project-26295-1660024117"><img src="https://projectpeta.s3.jp-tok.cloud-object-storage.appdomain.cloud/ss4.jpg"/></a>
+        <a href="https://github.com/IBM-EPBL/IBM-Project-26295-1660024117"><img src="https://projectpeta.s3.jp-tok.cloud-object-storage.appdomain.cloud/ss5.jpg"/></a>
+    </div>
+    <script>
+      window.watsonAssistantChatOptions = {
+        integrationID: "7f568ffe-fc4c-4241-a41f-53a2afb5fea8", // The ID of this integration.
+        region: "jp-tok", // The region your integration is hosted in.
+        serviceInstanceID: "9d16a78c-115e-4e93-9194-0a18c2694136", // The ID of your service instance.
+        onLoad: function(instance) { instance.render(); }
+      };
+      setTimeout(function(){
+        const t=document.createElement('script');
+        t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+        document.head.appendChild(t);
+      });
+    </script>
+</body>
+</html>

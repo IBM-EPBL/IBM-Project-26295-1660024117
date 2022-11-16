@@ -1,5 +1,0 @@
-Flask
-ibm-db
-ibm_db_dbi
-Flask-SQLAlchemy
-Flask-Session

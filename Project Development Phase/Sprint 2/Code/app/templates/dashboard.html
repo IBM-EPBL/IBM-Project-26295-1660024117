@@ -1,0 +1,204 @@
+{% extends "header.html" %}
+
+
+{% block body %}
+
+<div class="container-fluid">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" {% if active_tab == 'Home' %} class="active" {% endif %}><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+    <li role="presentation"><a href="#budget" aria-controls="budget" role="tab" data-toggle="tab">Budget</a></li>
+    <li class="dropdown" role="presentation" {% if active_tab == 'expense' %} class="active" {% endif %} ><a class="dropdown-toggle" data-toggle="dropdown" href="#expense">Expenses<span class="caret"></span></a>
+	    <ul class="dropdown-menu">
+	      <li><a href="#daily_expense" aria-controls="daily_expense" role="tab" data-toggle="tab">Daily</a></li>
+	      <li><a href="#monthly_expense" aria-controls="monthly_expense" role="tab" data-toggle="tab">Monthly</a></li>
+	     </ul>
+    </li>
+    <li role="presentation"><a href="#statistics" aria-controls="statistics" role="tab" data-toggle="tab">Stats</a></li>
+  </ul>
+  <!-- Tab panes -->
+   <div class="tab-content">
+	   <div role="tabpanel" {% if active_tab == 'Home' %} class="tab-pane active" {% else %} class="tab-pane" {% endif %} id="home">
+			
+			<h3 style="text-align: center;">Welcome {{ session.username }}!</h3>
+			<br>
+			
+			<form action="" class="form-inline" method="post">
+				<input type="text" class="form-control" name="email" placeholder="{{user_email}}" value="{{request.form.email}}">
+  				<button type="submit" class="btn btn-primary mb-2" name="submit" value="Save Email">Save</button>
+			</form>
+
+			<br>
+
+			<!-- Trigger the modal with a button -->
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#PasswordModal">Reset Password</button>
+
+   				<!-- Modal -->
+				<div id="PasswordModal" class="modal fade" role="dialog">
+				  <div class="modal-dialog modal-md">
+
+				    <!-- Modal content-->
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        <h4 class="modal-title">Reset Password</h4>
+				      </div>
+				      <div class="modal-body">
+				          <h3>Change your password!</h3>
+				          	<form action="" class="form-inline" method="post">
+								<input type="password" class="form-control"  name="NewPassword" value="{{request.form.NewPassword}}">
+								<input class="btn btn-default" type="submit" name="submit" value="Set Password">
+							</form>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				      </div>
+				    </div>
+
+				  </div>
+				</div>
+	   	</div>
+		<div role="tabpanel" class="tab-pane" id="budget">
+			<ul>
+			<br>
+					
+				<!-- Trigger the modal with a button -->
+				<button type="button" class="btn btn-primary btn-block"" data-toggle="modal" data-target="#myModal">Edit Budget</button>
+
+   				<!-- Modal -->
+				<div id="myModal" class="modal fade" role="dialog">
+				  <div class="modal-dialog modal-lg">
+
+				    <!-- Modal content-->
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        <h4 class="modal-title">Calendar</h4>
+				      </div>
+				      <div class="modal-body">
+				          <h3>{{ html_code|safe }}</h3>
+				          <h1>Set Budget for this month!</h1>
+				          	<form action="" class="form-inline" method="post">
+								<input type="text" class="form-control" placeholder="Budget Amount in Rs." name="amount" value="{{request.form.amount}}">
+								<input class="btn btn-default" type="submit" name="submit" value="Set Budget">
+							</form>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				      </div>
+				    </div>
+
+				  </div>
+				</div>
+				
+			</ul>
+		</div>
+		<div role="tabpanel" {% if active_tab == 'expense' and isDaily == True %} class="tab-pane active" {% else %} class="tab-pane" {% endif %} id="daily_expense">
+			<ul>
+		    	{% for cat in CATS["Daily"] %}
+		    		<br>
+		    		<div class="container-fluid" >
+		    			<p id="cat_daily">
+		    			{{cat}}
+
+		    			<button class="btn btn-sm btn-info" data-toggle="modal" data-target="#ModalEditDaily{{loop.index}}" style="float:right;"><span class="glyphicon glyphicon-edit"></span></button> 
+		    			
+		    			</p>
+		    		</div>
+		    		<!-- Modal -->
+					<div id="ModalEditDaily{{loop.index}}" class="modal fade" role="dialog">
+					  <div class="modal-dialog modal-lg">
+
+					    <!-- Modal content-->
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal">&times;</button>
+					        <h4 class="modal-title">{{cat}}</h4>
+					      </div>
+					      <div class="modal-body">
+					          <h1>Spent on {{cat}} today!</h1>
+					          	<form action="" class="form-inline" method="post">
+									<input type="text" class="form-control" placeholder="Amount in Rs." name="amount" value="{{request.form.amount}}">
+									<input type="text" class="form-control" placeholder="Location" name="location" value="{{request.form.location}}">
+									<input type="text" class="form-control" placeholder="Comments" name="comment" value="{{request.form.comment}}" maxlength="140" size="40" >
+									<input class="btn btn-default" type="submit" name="submit" value="Set {{cat}} amount">
+								</form>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					      </div>
+					    </div>
+
+					  </div>
+				</div>
+
+		    	{% endfor %}
+		    </ul>
+		</div>
+		<div role="tabpanel" {% if active_tab == 'expense' and isDaily == False %} class="tab-pane active" {% else %} class="tab-pane" {% endif %} id="monthly_expense">
+			<ul>
+		    	{% for cat in CATS["Monthly"] %}
+		    		<br>
+		    		<div class="container-fluid" >
+		    			<p id="cat_daily">
+		    			{{cat}} 
+
+		    			<button class="btn btn-sm btn-info" data-toggle="modal" data-target="#ModalEditMonthly{{loop.index}}" style="float:right; "><span class="glyphicon glyphicon-edit"></span></button> 
+
+		    			</p>
+		    		</div>
+
+		    		<!-- Modal -->
+					<div id="ModalEditMonthly{{loop.index}}" class="modal fade" role="dialog">
+					  <div class="modal-dialog modal-lg">
+
+					    <!-- Modal content-->
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal">&times;</button>
+					        <h4 class="modal-title">{{cat}}</h4>
+					      </div>
+					      <div class="modal-body">
+					          <h1>Spent for {{cat}}!</h1>
+					          	<form action="" class="form-inline" method="post">
+									<input type="text" class="form-control" placeholder="Amount in Rs." name="amount" value="{{request.form.amount}}">
+									<input type="text" class="form-control" placeholder="Location" name="location" value="{{request.form.location}}">
+									<input type="text" class="form-control" placeholder="Comments" name="comment" value="{{request.form.comment}}" maxlength="140" size="40"  >
+									<input  class="btn btn-default" type="submit" name="submit" value="Set {{cat}} amount">
+								</form>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					      </div>
+					    </div>
+
+					  </div>
+				</div>
+
+		    	{% endfor %}
+		    </ul>
+		</div>
+		<div role="tabpanel" class="tab-pane" id="statistics">
+			{% for pie in pie_data %}
+				<div class="container-fluid">
+					<br>
+					<embed type="image/svg+xml" src={{pie|safe}}>	
+				</div>
+			{% endfor %}
+			<br>
+			<h3>My Expenditure and Budget comparison </h3>
+				<div class="container-fluid">
+					<br>
+					<embed type="image/svg+xml" src={{gauge_data|safe}}>	
+				</div>
+			<h4><b>Note:</b> 0 expenditure and 1 budget value implies, you haven't set the budget and expenses for that month!</h4>
+			<br>
+			<br>
+			<br>
+
+		</div>
+	</div>
+
+</div>
+{% endblock %}
+

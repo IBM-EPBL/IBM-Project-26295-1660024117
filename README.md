@@ -72,7 +72,7 @@ Team member3: GARKI N <br>
 | SHANAVAAS J TEAM LEADER | <button> <a href="https://github.com/IBM-EPBL/IBM-Project-26295-1660024117/tree/main/ASSIGNMENTS/SHANAVAAS%20(Team%20leader)">CLICK HERE!  </a></button>       
 | RAGAVAN R | <button> <a href="https://github.com/IBM-EPBL/IBM-Project-26295-1660024117/tree/main/ASSIGNMENTS/RAGAVAN%20R">CLICK HERE!  </a> </button> |
 | ARIVIN A    | <button><a href="https://github.com/IBM-EPBL/IBM-Project-26295-1660024117/tree/main/ASSIGNMENTS/ARIVIN">CLICK HERE!  </a> </button> |
-| GARKI N    | <button><a href="https://github.com/IBM-EPBL/IBM-Project-26295-1660024117/tree/main/ASSIGNMENTS/GARKI">CLICK HERE!  </a> </button> |
+| GARKI N    | <button><a href="https://github.com/IBM-EPBL/IBM-Project-26295-1660024117/tree/main/ASSIGNMENTS/GARKI%20N">CLICK HERE!  </a> </button> |
 
 
 # ??????? LANGUAGES AND TECHNOLOGIES USED <br />
